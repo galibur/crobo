@@ -17,7 +17,7 @@ print 'start node'
 
 
 def makeCmd(function, value):
-	msg = '{"function":"' + str(function) + '","speed":"' + str(value) + '"}'
+	msg = '{"function":"' + str(function) + '","speed":' + str(value) + '}'
 	print(msg)
 	pub.publish(msg)
 
@@ -28,7 +28,7 @@ def getXboxControllerInput(msg):
 	if str(cmd['user_input']) == "xbox":
 		#print(str(cmd))
 		key = str(cmd['key'])
-		val = str(cmd['val'])
+		val = cmd['val']
 
 		#if val == "0.0" or val == "0":
 		#	makeCmd("stop", 0)
