@@ -40,10 +40,10 @@ def getXboxControllerInput(msg):
 			makeCmd("rotateRight",val)
 	
 		elif key == "UP":
-			makeCmd("forward",val)
+			makeCmd("moveForward",val)
 	
 		elif key == "DOWN":
-			makeCmd("backward",val)
+			makeCmd("moveBackward",val)
 	
 		elif key == "LEFT":
 			makeCmd("turnLeft",val)
