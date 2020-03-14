@@ -15,9 +15,11 @@ publisher_channel = "/crobo_control_commands"
 
 print 'start node'
 
+
 def makeCmd(function, value):
 	msg = '{"function":"' + str(function) + '","speed":"' + str(value) + '"}'
 	print(msg)
+	pub.publish(msg)
 
 def getXboxControllerInput(msg):
 
@@ -50,6 +52,7 @@ def getXboxControllerInput(msg):
 			makeCmd("turnRight",val)
 	
 	
+pub = rospy.Publisher(publisher_channel, String, queue_size=10)
 
 rospy.init_node(node_name)
 sub = rospy.Subscriber(subscriber_channel, String, getXboxControllerInput)
