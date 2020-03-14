@@ -14,8 +14,8 @@ GPIO_ECHO = 9
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 
-GPIO_TRIGGER2 = 10
-GPIO_ECHO2 = 12
+GPIO_TRIGGER2 = 12
+GPIO_ECHO2 = 10
 GPIO.setup(GPIO_TRIGGER2, GPIO.OUT)
 GPIO.setup(GPIO_ECHO2, GPIO.IN)
 
@@ -73,6 +73,6 @@ while not rospy.is_shutdown():
 	msg_str = '{"hc_sr04_distance_' + str(id2) + '":' + str(abstand) + '}'
 	pub.publish(msg_str)
 
-	time.sleep(1)
+	time.sleep(0.2)
 
 sys.exit(1)
