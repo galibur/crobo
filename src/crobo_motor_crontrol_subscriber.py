@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 import rospy
 from std_msgs.msg import String
+import json
 
 GPIO.setmode(GPIO.BCM)
 
@@ -106,21 +107,30 @@ class Crobo():
 def executeMotorCommand(msg):
 
 	print msg.data
-	crobo = Crobo()
+	cmd = json.loads(msg.data)
+	function = str(cmd['function'])
+	speed = cmd['speed'] * 100
 
-	crobo.moveForward(100)
-	sleep(2)
-	crobo.stop()
-	sleep(2)
-	crobo.rotateLeft(59)
-	sleep(2)
-	crobo.rotateRight(59)
-	sleep(2)
-	crobo.turnLeft(59)
-	sleep(2)
-	crobo.turnRight(59)
-	sleep(2)
-	crobo.stop()
+	if function == 'rotateLeft':
+		crobo.rotateLeft(speed)
+
+	elif function == 'rotateRight':
+		crobo.rotateRight(speed)
+
+	elif function == 'moveForward':
+		crobo.moveForward(speed)
+
+	elif function == 'moveBackward':
+		crobo.moveBackward(speed)
+
+	elif function == 'turnLeft':
+		crobo.turnLeft(speed)
+
+	elif function == 'turnRight':
+		crobo.turnRight(speed)
+
+
+crobo = Crobo()
 
 print 'start node'
 rospy.init_node('crobo_motor_control_subscriber')
